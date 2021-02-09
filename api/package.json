@@ -1,0 +1,37 @@
+{
+  "name": "amparo-saude",
+  "version": "1.0.0",
+  "description": "api",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx mocha --parallel --exit ./tests",
+    "test:dev": "npx mocha --watch ./tests",
+    "test:cov": "npx nyc --reporters=html,text npm test",
+    "dev": "npx nodemon src/index.js",
+    "prod": "npm test && node ./src/index.js --production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lurique/amparo-saude.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lurique/amparo-saude/issues"
+  },
+  "homepage": "https://github.com/lurique/amparo-saude#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  },
+  "dependencies": {
+    "chai": "^4.3.0",
+    "dotenv": "^8.2.0",
+    "joi": "^17.4.0",
+    "mocha": "^8.2.1",
+    "mongodb": "^3.6.4",
+    "mongoose": "^5.11.15",
+    "nyc": "^15.1.0",
+    "sinon": "^9.2.4"
+  }
+}
