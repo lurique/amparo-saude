@@ -9,7 +9,7 @@ export function Navbar() {
 			</div>
 			<div className={styles['navbar__menu']}>
 				<ul>
-					<li><a href="javascript:void(0);s" className="active">Atividades</a></li>
+					<li><a href="#" className="active">Atividades</a></li>
 				</ul>
 			</div>
 		</nav>

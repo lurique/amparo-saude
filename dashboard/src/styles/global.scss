@@ -1,9 +1,51 @@
 @import "normalize";
 
+/**
+* Defining some color variables without s(as|cs)s vars
+*/
 :root {
 	--color-green: #38EF7D;
-	--color-blue: #009FFF;
+	--color-blue: #097DF9;
+	--color-lightBlue: #38CAFF;
 	--color-red: #EC2F4B;
+	--color-darkGray: #484C67;
+	--color-lightGray: #f1f1f1;
 	--color-white: #FFF;
 	--color-black: #000;
+}
+
+body {
+	background: var(--color-lightGray);
+}
+
+/**
+* Keeping some space for the fixed navbar
+*/
+#content {
+	margin-top: 66px;
+}
+
+/**
+* Defining some helpers
+* as Tailwind does
+*/
+.flex {
+	display: flex;
+}
+
+.items-center {
+	align-items: center;
+}
+
+.flex-end {
+	justify-content: flex-end;
+}
+
+.padding-30 {
+	padding: 30px;
+}
+
+.paddingx-30 {
+	padding-left: 30px;
+	padding-right: 30px;
 }
