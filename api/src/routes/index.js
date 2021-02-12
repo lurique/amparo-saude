@@ -9,6 +9,7 @@ const routes = {
 	"/patients/search:get": (request, response) => Patients.search(request, response),
 	"/patients:post": (request, response) => Patients.create(request, response),
 	"/activities:get": (request, response) => Activities.list(request, response),
+	"/activities/search:post": (request, response) => Activities.search(request, response),
  	"/activities:post": (request, response) => Activities.create(request, response),
 	"/activities:put": (request, response) => Activities.update(request, response),
 	"/activities/count:get": (request, response) => Activities.count(request, response),

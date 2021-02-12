@@ -32,6 +32,5 @@ module.exports = {
 	dbCountDocuments,
 	validateData,
 	dbAddDocument,
-	listActivities: require('./activities'),
 	searchPatients: require('./patients')
 }

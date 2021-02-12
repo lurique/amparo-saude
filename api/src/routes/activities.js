@@ -7,20 +7,40 @@ const {
 	dbFindOneAndUpdate,
 	dbCountDocuments,
 	dbAddDocument,
-	validateData,
-	listActivities
+	validateData
 } = require('../services')
+
+const {
+	listActivities,
+	searchActivities
+} = require('../services/activities')
 
 const Activities = {
 	list: async function(request, response) {
 		try {
-			const _id = request.queryString?.id
+			const _id = request?.queryString?.id
 			const page = request.queryString?.page
 			const limit = request.queryString?.limit
 			const query = _id ? { _id } : {}
 
 			const data = await listActivities({query, page, limit})
 			responseHandler(response, {status: 200, message: "Listed activities", body: data})
+		} catch ( err ) {
+			console.error(err)
+			responseHandler(response, {status: 400, message: "An error ocurred", body: err})
+		}
+	},
+
+	search: async function(request,  response) {
+		try {
+			const query = await bodyParser(request)
+
+			if ( !query.due_date || query.due_date === "" ) delete query.due_date
+			if ( !query.status || query.status === "0" ) delete query.status
+			if ( !query.cpf || query.cpf === "" ) delete query.cpf
+			
+			const data = await searchActivities({query})
+			responseHandler(response, {status: 200, message: "Activities counted", body: data})
 		} catch ( err ) {
 			console.error(err)
 			responseHandler(response, {status: 400, message: "An error ocurred", body: err})

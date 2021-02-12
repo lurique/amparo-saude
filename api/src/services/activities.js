@@ -1,8 +1,8 @@
 const { Models } = require('../models')
 
-const listActivities = async ({limit, page}) => {
-	const activities = await Models.Activity.find().limit(limit ?? 0).skip(page ? page * 10 : 0).sort({due_date: -1})
-	
+const listActivities = async ({query, limit, page}) => {
+	const activities = await Models.Activity.find(query).limit(limit ?? 10).skip(page ? page * 10 : 0).sort({due_date: -1})
+
 	const data = []
 	for ( let activity of activities ) {
 		const { patient } = activity
@@ -21,4 +21,18 @@ const listActivities = async ({limit, page}) => {
 	return data
 }
 
-module.exports = listActivities
+const searchActivities = async ({query}) => {
+	const patient = await Models.Patient.findOne({cpf: query.cpf})
+	
+	delete query.cpf
+	query.patient = patient._id
+
+	const response = await listActivities({query});
+
+	return response
+}
+
+module.exports = {
+	listActivities,
+	searchActivities
+}

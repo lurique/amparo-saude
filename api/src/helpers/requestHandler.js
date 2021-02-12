@@ -19,6 +19,7 @@ const requestHandler = (request, response) => {
 	}
 	
 	if ( url.indexOf('?') !== -1 ) {
+		console.log(url);
 		request.queryString = parseQueryString(url.split('?')[1])
 	}
 
