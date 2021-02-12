@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin")
 module.exports = {
 	entry: "./src/index.js",
 	output: {
-		path: path.join(__dirname, "../api/views"),
+		path: path.join(__dirname, "../api/public"),
 		filename: "bundle.min.js"
 	},
 	module: {
@@ -17,7 +17,10 @@ module.exports = {
 					options: {
 						presets: [
 							"@babel/preset-env",
-							"@babel/preset-react"
+							"@babel/react"
+						],
+						plugins: [
+							"@babel/plugin-transform-runtime"
 						]
 					}
 				}
@@ -42,6 +45,10 @@ module.exports = {
 						loader: "sass-loader"
 					}
 				]
+			},
+			{
+				test: /\.css$/i,
+				use: ["css-loader"]
 			}
 		]
 	},

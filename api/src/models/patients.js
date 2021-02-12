@@ -1,8 +1,7 @@
-const Database = require('../config/database')
+const mongoose = require('mongoose')
 const Joi = require('joi')
-const { mongoose } = new Database()
 
-const patientModel = mongoose.model("Patients", new mongoose.Schema({
+const patientModel = mongoose.model("Patients", mongoose.Schema({
 	name: {
 		type: String,
 		required: true,
@@ -21,13 +20,13 @@ const patientModel = mongoose.model("Patients", new mongoose.Schema({
 }))
 
 const validatePatientModel = (data) => {
-	const schema = {
+	const schema = Joi.object({
 		name: Joi.string().required(),
-		cpf: Joi.string().required()
-	}
+		cpf: Joi.string().required().min(11).max(11)
+	})
 
-	return Joi.validate(data, schema)
+	return schema.validate(data)
 }
 
 exports.Patient = patientModel
-exports.ValidatePatient = validatePatientModel
+exports.validatePatient = validatePatientModel

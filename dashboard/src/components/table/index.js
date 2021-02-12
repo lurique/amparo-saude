@@ -1,7 +1,8 @@
 import React from 'react'
+import { Pagination } from '../'
 import styles from './style.module.scss'
 
-export function Table({className, headers, children}) {
+export function Table({className, headers, children, pages}) {
 	return (
 		<div className={styles["table__responsive"]}>
 			<table className={`${className} ${styles.table}`}>
@@ -22,6 +23,8 @@ export function Table({className, headers, children}) {
 					{children}
 				</tbody>
 			</table>
+
+			<Pagination pages={pages}/>
 		</div>
 	)
 }

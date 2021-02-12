@@ -9,6 +9,7 @@
 	position: fixed;
 	top: 0;
 	width: 100%;
+	z-index: 9;
 
 	&__brand,
 	&__menu {
@@ -29,10 +30,15 @@
 		justify-content: right;
 
 		ul {
+			display: flex;
 			list-style-type: none;
 			padding: 0;
 			
 			li {
+				&:not(:last-child) {
+					margin-right: 15px;
+				}
+
 				a {
 					color: var(--color-darkGray);
 					display: block;
@@ -52,7 +58,7 @@
 						width: 100%;
 						z-index: -1;
 					}
-
+	
 					&:hover {
 						&::after {
 							height: 100%;
