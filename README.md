@@ -1,5 +1,9 @@
 # {devtest} Amparo Saúde
 
+<p align="center">
+  <img src="https://media.giphy.com/media/h0CWmjvB6I9F2LbUmk/giphy.gif" alt="Giphy.com - Author: Hantarooo"/>
+</p>
+
 ## Tecnologias utilizadas
 
 API: Node.js
