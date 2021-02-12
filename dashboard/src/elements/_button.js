@@ -33,6 +33,16 @@ const StyledButton = styled.button`
 			box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.5);
 		}
 	`}
+
+	${props => props.color === "green" && `
+		background: var(--color-green);
+		box-shadow: 0 2px 4px 0 rgba(0,0,0,0.15);
+		color: var(--color-darkGray);
+
+		&:hover {
+			box-shadow: 0 0 0 4px rgba(56, 239, 125, 0.5);
+		}
+	`}
 `
 
 export function Button({className, style, type, color, onClick, children}) {

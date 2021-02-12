@@ -1,4 +1,4 @@
-import { listActivities, updateActivity, createActivity, countActivities } from './_activities'
+import { listActivities, updateActivity, createActivity, countActivities, searchActivities } from './_activities'
 import { searchPatients, createPatient } from './_patients'
 
 const Services = {
@@ -7,7 +7,8 @@ const Services = {
 	createActivity,
 	searchPatients,
 	createPatient,
-	countActivities
+	countActivities,
+	searchActivities
 }
 
 export default Services

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
+import InputMask from 'react-input-mask'
 import { Table, Pagination } from '../components'
-import { Loader, Select } from '../elements'
+import { Loader, Select, Button } from '../elements'
 import Services from '../services'
 import { isoToDateString } from '../helpers'
 
@@ -80,32 +81,77 @@ export default function Activities({shouldRender}) {
 		setSelectedPage(index)
 	}
 
+	const handleSearch = async (e) => {
+		e.preventDefault()
+
+		const response = await Services.searchActivities(e)
+		if ( !response || response.length === 0 ) return
+
+		console.log(response)
+		setActivities(response.data)
+	}
+
 	return (
-		<section id="activities" className="padding-30">
-			<Table
-				headers={[
-					"Paciente",
-					"CPF",
-					"Data",
-					"Atividade",
-					"Status"
-				]}
-				pages={pages}
-			>
-				{
-					activities && !loading ?
-						activities.map(activity => {
-							return <TableRow key={activity._id} activity={activity}/>
-						})
-					: <tr>
-						<td><Loader /></td>
-						<td><Loader /></td>
-						<td><Loader /></td>
-						<td><Loader /></td>
-						<td><Loader /></td>
-					</tr>
-				}
-			</Table>
+		<section id="activities">
+			<div className="w-full bg-light-gray padding-30">
+				<form className="flex justify-center items-center children-mxa15" onSubmit={handleSearch}>
+					<InputMask
+						mask="999.999.999.99"
+						maskChar=" "
+						placeholder="CPF do Paciente"
+						name="cpf"
+						className={`w-full input`}
+					/>
+
+					<Select defaultStyle="large" defaultValue={"0"} name="status">
+						<option value="0">Status do Aprazamento</option>
+						<option value="aberto">Aberto</option>
+						<option value="atrasado">Atrasado</option>
+						<option value="finalizado">Finalizado</option>
+					</Select>
+
+					<InputMask
+						mask="99/99/9999"
+						maskChar=" "
+						placeholder="Data"
+						name="due_date"
+						className={`w-full input`}
+					/>
+
+					<Button
+						type="large"
+						color="green"
+					>Filtrar</Button>
+				</form>
+
+			</div>
+
+			<div className="padding-30">
+				<Table
+					headers={[
+						"Paciente",
+						"CPF",
+						"Data",
+						"Atividade",
+						"Status"
+					]}
+					pages={pages}
+				>
+					{
+						activities && !loading ?
+							activities.map(activity => {
+								return <TableRow key={activity._id} activity={activity}/>
+							})
+						: <tr>
+							<td><Loader /></td>
+							<td><Loader /></td>
+							<td><Loader /></td>
+							<td><Loader /></td>
+							<td><Loader /></td>
+						</tr>
+					}
+				</Table>
+			</div>
 
 			<div className="flex align-center justify-center">
 				<Pagination pages={pages} selectedPage={selectedPage} onClick={handlePageChange}/>

@@ -51,10 +51,11 @@ function PatientModal({modals, setModals}) {
 	const [ requesting, setRequesting ] = useState(false)
 
 	const handleSubmit = async (e) => {
-		await setRequesting(true)
+		e.preventDefault()
+		setRequesting(true)
 		await Services.createPatient(e)
-		await setRequesting(false)
-		await setModals({...modals, patient: false})
+		setRequesting(false)
+		setModals({...modals, patient: false})
 	}
 
 	return (
@@ -109,6 +110,7 @@ function ActivityModal({modals, setModals, shouldRender, setShouldRender}) {
 	const handlePatientSelect = e => setSelectedPatient(e)
 	
 	const handleSubmit = async (e) => {
+		e.preventDefault()
 		setRequesting(true)
 		await Services.createActivity(e, selectedPatient)
 		setRequesting(false)

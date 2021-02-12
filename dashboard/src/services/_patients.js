@@ -8,8 +8,6 @@ export const searchPatients = async (query) => {
 }
 
 export const createPatient = async (e, body) => {
-	e.preventDefault();
-
 	const data = serialize(e.target)
 	
 	let properties = {}
@@ -18,8 +16,11 @@ export const createPatient = async (e, body) => {
 	properties.cpf = properties.cpf.split('.').join("")
 
 	const response = await requestHandler("POST", "/patients", properties)
-	if ( !response || !response.data ) return toast.error('Ocorreu um erro ao criar seu paciente. Verifique os dados e tente novamente.', {position: "top-right"});
+	if ( !response || !response.data ) {
+		toast.error('Ocorreu um erro ao criar seu paciente. Verifique os dados e tente novamente.', {position: "top-right"})
+		return []
+	}
 	toast.info('Paciente criado com sucesso!', {position: "top-right"});
-	
+
 	return response.data
 }

@@ -1,5 +1,6 @@
 .pagination {
 	display: flex;
+	margin-bottom: 30px;
 	width: 100%;
 	
 	ul {
@@ -10,10 +11,10 @@
 		width: 100%;
 
 		li {
-			background: var(--color-white);
+			background: var(--color-darkGray);
 			border-radius: 4px;
 			box-shadow: 0 2px 4px 0 rgba(0,0,0,0.15);
-			color: var(--color-darkGray);
+			color: var(--color-white);
 			cursor: pointer;
 			margin: 0 8px;
 			padding: 8px 13px;
