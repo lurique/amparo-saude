@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Table } from '../components'
+import { Table, Pagination } from '../components'
 import { Loader, Select } from '../elements'
 import Services from '../services'
 import { isoToDateString } from '../helpers'
@@ -55,15 +55,30 @@ const TableRow = ({activity}) => {
 export default function Activities({shouldRender}) {
 	const [ activities, setActivities ] = useState([])
 	const [ loading, setLoading ] = useState(true)
+	const [ pages, setTotalPages ] = useState(0)
+	const [ selectedPage, setSelectedPage ] = useState(0)
 
 	useEffect(() => {
 		async function getActivities() {
-			const activities = await Services.listActivities()
+			let countActivities = await Services.countActivities()
+			if ( countActivities <= 10 ) {
+				countActivities = 0
+			} else {
+				countActivities = Math.ceil(countActivities / 10)
+			}
+			setTotalPages(countActivities)
+
+			const activities = await Services.listActivities(`?page=${selectedPage}`)
 			setActivities(activities)
 			setLoading(false)
 		}
 		getActivities()
-	}, [shouldRender])
+	}, [shouldRender, selectedPage])
+
+	const handlePageChange = async(index) => {
+		if ( index === selectedPage ) return
+		setSelectedPage(index)
+	}
 
 	return (
 		<section id="activities" className="padding-30">
@@ -75,6 +90,7 @@ export default function Activities({shouldRender}) {
 					"Atividade",
 					"Status"
 				]}
+				pages={pages}
 			>
 				{
 					activities && !loading ?
@@ -90,6 +106,10 @@ export default function Activities({shouldRender}) {
 					</tr>
 				}
 			</Table>
+
+			<div className="flex align-center justify-center">
+				<Pagination pages={pages} selectedPage={selectedPage} onClick={handlePageChange}/>
+			</div>
 		</section>
 	)
 }

@@ -1,8 +1,11 @@
 import { requestHandler, serialize, dateStringToIso } from '../helpers'
 import { toast } from 'react-toastify'
 
-export const listActivities = async () => {
-	const data = await requestHandler("GET", "/activities")
+export const listActivities = async (query) => {
+	let url = "/activities"
+	if ( query ) url = `/activities${query}`
+
+	const data = await requestHandler("GET", url)
 	if ( !data || !data.data ) return []
 	return data.data
 }
@@ -10,6 +13,12 @@ export const listActivities = async () => {
 export const updateActivity = async (body) => {
 	const data = await requestHandler("PUT", "/activities", body)
 	if ( !data || !data.data ) return []
+	return data.data
+}
+
+export const countActivities = async () => {
+	const data = await requestHandler("GET", "/activities/count")
+	if ( !data || !data.data ) return 0
 	return data.data
 }
 

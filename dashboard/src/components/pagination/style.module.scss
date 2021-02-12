@@ -1,0 +1,28 @@
+.pagination {
+	display: flex;
+	width: 100%;
+	
+	ul {
+		display: flex;
+		justify-content: center;
+		list-style-type: none;
+		padding: 0;
+		width: 100%;
+
+		li {
+			background: var(--color-white);
+			border-radius: 4px;
+			box-shadow: 0 2px 4px 0 rgba(0,0,0,0.15);
+			color: var(--color-darkGray);
+			cursor: pointer;
+			margin: 0 8px;
+			padding: 8px 13px;
+
+			&[class="active"] {
+				background: var(--color-blue);
+				color: var(--color-white);
+				font-weight: bold;
+			}
+		}
+	}
+}

@@ -1,5 +1,4 @@
 import React from 'react'
-import { Pagination } from '../'
 import styles from './style.module.scss'
 
 export function Table({className, headers, children, pages}) {
@@ -23,8 +22,6 @@ export function Table({className, headers, children, pages}) {
 					{children}
 				</tbody>
 			</table>
-
-			<Pagination pages={pages}/>
 		</div>
 	)
 }
